@@ -1,5 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 include('connect.php');
 $query = $conn->prepare('SELECT * FROM hospitals');
 $query->execute();
