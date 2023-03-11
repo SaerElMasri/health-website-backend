@@ -21,9 +21,12 @@ if ($email_exists > 0) {
     $response['resutl'] = 'Failed to register user';
 } else {
     $query = $conn->prepare('INSERT INTO users(first_name, email, password, dob, usertype_id, last_name) VALUES (?, ?, ?, ?, ?, ?)');
-    $query->bind_param('ssssis', $first_name, $email, $hashed_password, $dob, $usertype, $last_name);
+    $query->bind_param('ssssis',$first_name, $email, $hashed_password, $dob, $usertype, $last_name);
     $query->execute();
+    $user_id = $query->insert_id;
     $query->close();
+    $response['user_type'] = $usertype;
+    $response['user_id'] = $user_id;
     $response['result'] = 'Success';
 }
 
